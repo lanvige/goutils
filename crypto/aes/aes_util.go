@@ -40,7 +40,7 @@ func Encrypt(data []byte, key, iv []byte) (string, error) {
 	encrypter := cipher.NewCBCEncrypter(ckey, iv)
 
 	// PKCS7补码
-	str := cryptolib.PKCS7Padding([]byte(data))
+	str := goutilscrypto.PKCS7Padding([]byte(data))
 	out := make([]byte, len(str))
 
 	encrypter.CryptBlocks(out, str)

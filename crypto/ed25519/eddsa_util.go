@@ -48,7 +48,7 @@ func getPriKey(privartekey []byte) (*ed25519.PrivateKey, error) {
 // ==== GenRsaKey Operations ===== //
 
 // GenerateKey GenerateKey
-func GenerateKey() (*ed25519.PrivateKey, *ed25519.PublicKey, error) {
+func GenerateKey() (*ed25519.PublicKey, *ed25519.PrivateKey, error) {
 	// Gen Private key
 	publicKey, privateKey, err := ed25519.GenerateKey(rand.Reader)
 
@@ -56,7 +56,7 @@ func GenerateKey() (*ed25519.PrivateKey, *ed25519.PublicKey, error) {
 		return nil, nil, err
 	}
 
-	return &privateKey, &publicKey, nil
+	return &publicKey, &privateKey, nil
 }
 
 // DumpPriKeyPKCS8Base64 DumpPriKeyPKCS8Base64

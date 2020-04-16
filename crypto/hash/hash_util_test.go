@@ -20,7 +20,7 @@ func TestCRC32Hex(t *testing.T) {
 }
 
 func TestMD5ShortGen(t *testing.T) {
-	rdxString := cryptolib.GetRandomString(100)
+	rdxString := goutils.GetRandomString(100)
 	code1 := MD5Hex(rdxString)
 	code2 := MD5HexShort(rdxString)
 	code3 := MD5Base64(rdxString)

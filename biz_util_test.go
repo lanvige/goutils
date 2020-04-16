@@ -24,8 +24,8 @@ func TestOriIDID(t *testing.T) {
 	applog.Info(code)
 }
 
-func TestUserBizIDGen(t *testing.T) {
-	code := UserBizIDGen()
+// func TestUserBizIDGen(t *testing.T) {
+// 	code := UserBizIDGen()
 
-	applog.Info(code)
-}
+// 	applog.Info(code)
+// }

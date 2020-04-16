@@ -37,7 +37,7 @@ nKIISF0cIfuRvUbKhfwIRAJjaHxxuNLonBBoRsqDXylsCDz30xZWMCKys0CuQJZQc
 // }
 
 func TestRSA256PKCS8KeyGen(t *testing.T) {
-	priKey, pubKey, _ := GenerateKey()
+	pubKey, priKey, _ := GenerateKey()
 
 	// 私钥 64，公钥 32 byte
 	// 所以 hex 是 128
@@ -54,7 +54,7 @@ func TestRSA256PKCS8KeyGen(t *testing.T) {
 	applog.Warn(pubkeybase64)
 	applog.Warn(pubkeyhex)
 
-	abc, _ := priKey.Sign()([]byte("dc95794a52749100bac61f8195e30162264141af4fea26e5446fa88858ed86aadc6ea14248af80db95b81b97e436e37107f7d2cdfb875401da6e598547e72713"))
+	// abc, _ := priKey.Sign()([]byte("dc95794a52749100bac61f8195e30162264141af4fea26e5446fa88858ed86aadc6ea14248af80db95b81b97e436e37107f7d2cdfb875401da6e598547e72713"))
 
 }
 
