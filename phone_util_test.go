@@ -3,7 +3,7 @@ package utils
 import (
 	"testing"
 
-	applog "github/lanvige/goutils/logger"
+	applog "github.com/lanvige/goutils/logger"
 
 	"github.com/ttacon/libphonenumber"
 )

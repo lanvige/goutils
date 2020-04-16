@@ -3,7 +3,7 @@ package utils
 import (
 	"testing"
 
-	applog "github/lanvige/goutils/logger"
+	applog "github.com/lanvige/logger"
 )
 
 func TestIsDigitPresent(t *testing.T) {

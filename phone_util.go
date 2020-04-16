@@ -1,7 +1,7 @@
 package utils
 
 import (
-	apperr "github/lanvige/goutils/error"
+	apperr "github.com/lanvige/goutils/error"
 
 	"github.com/ttacon/libphonenumber"
 )

@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"time"
 
-	applog "github/lanvige/goutils/logger"
+	applog "github.com/lanvige/goutils/logger"
 )
 
 // OrderBizIDGen BIZIDGen
