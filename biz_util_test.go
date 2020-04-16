@@ -3,7 +3,7 @@ package utils
 import (
 	"testing"
 
-	applog "goutils/logger"
+	applog "github/lanvige/goutils/logger"
 )
 
 func TestBIZIDGen(t *testing.T) {

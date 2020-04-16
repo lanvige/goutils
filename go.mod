@@ -1,4 +1,4 @@
-module goutils
+module github/lanvige/goutils
 
 go 1.14
 

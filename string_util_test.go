@@ -3,7 +3,7 @@ package utils
 import (
 	"testing"
 
-	applog "goutils/logger"
+	applog "github/lanvige/goutils/logger"
 )
 
 func TestRandomNumGen(t *testing.T) {
