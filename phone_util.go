@@ -3,7 +3,7 @@ package utils
 import (
 	apperr "github.com/lanvige/goutils/error"
 
-	"github.com/ttacon/libphonenumber"
+	libphonenumber "github.com/ttacon/libphonenumber"
 )
 
 // SplitPhone SplitPhone

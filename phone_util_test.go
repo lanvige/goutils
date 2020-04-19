@@ -5,7 +5,7 @@ import (
 
 	applog "github.com/lanvige/goutils/logger"
 
-	"github.com/ttacon/libphonenumber"
+	libphonenumber "github.com/ttacon/libphonenumber"
 )
 
 func TestCNPhoneSplit(t *testing.T) {
