@@ -8,9 +8,9 @@ import (
 
 // TestEncrypt TestEncrypt
 func TestEncrypt(t *testing.T) {
-	data := "10112319970712004X"
-	key := "-"
-	iv := "14266e140b5d0a68"
+	data := "1011212004X"
+	key := "abcdxxx"
+	iv := "14265d0a68"
 
 	dataByte := []byte(data)
 	keyByte := []byte(key)
@@ -26,9 +26,9 @@ func TestEncrypt(t *testing.T) {
 
 // TestDecrypt TestDecrypt
 func TestDecryptq(t *testing.T) {
-	data := "ImK1fgeV7XWqigpOTs5fnpA7youa/hh373WalpEZKcY="
-	key := "-"
-	iv := "14266e140b5d0a68"
+	data := "TGer5j10ZHn0adiIH8Xjhw=="
+	key := "abcdxxx"
+	iv := "14265d0a68"
 
 	// dataByte := []byte(data)
 	keyByte := []byte(key)

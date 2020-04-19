@@ -8,11 +8,6 @@ import (
 	uuid "github.com/gofrs/uuid"
 )
 
-// UUIDString UUIDString
-func UUIDString(id uuid.UUID) string {
-	return hex.EncodeToString(id.Bytes())
-}
-
 // UUIDGen UUIDGen
 // b9be9a09-7117-4bdb-9c6d-737269c86480
 func UUIDGen() string {
@@ -31,20 +26,32 @@ func UUIDV4Gen() string {
 	return uuid.Must(uuid.NewV4()).String()
 }
 
-// UUIDStringGen UUIDStringGen
+// UUIDV1StringGen UUIDV1StringGen
 // 5106b5e58ee44f74a5d49e779dcf7f57
-func UUIDStringGen() string {
+func UUIDV1StringGen() string {
+	uuid := uuid.Must(uuid.NewV1())
+	return UUIDString(uuid)
+}
+
+// UUIDV4StringGen UUIDV4StringGen
+// 5106b5e58ee44f74a5d49e779dcf7f57
+func UUIDV4StringGen() string {
 	uuid := uuid.Must(uuid.NewV4())
 	return UUIDString(uuid)
 }
 
+// UUIDString UUIDString
+func UUIDString(id uuid.UUID) string {
+	return hex.EncodeToString(id.Bytes())
+}
+
 // UUIDFromString UUIDFromString
 func UUIDFromString(value string) (uuid.UUID, error) {
-	uid, _ := uuid.FromString(value)
+	uid, err := uuid.FromString(value)
 
-	// if nil != err {
-	// 	return , err
-	// }
+	if nil != err {
+		return uuid.Nil, err
+	}
 
 	return uid, nil
 }
@@ -57,5 +64,6 @@ func SettlementID(id, modifier string) string {
 	sum := h.Sum(nil)
 	sum[6] = (sum[6] & 0x0f) | 0x30
 	sum[8] = (sum[8] & 0x3f) | 0x80
+
 	return uuid.FromBytesOrNil(sum).String()
 }

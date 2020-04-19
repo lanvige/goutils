@@ -9,13 +9,8 @@ import (
 	goutilscrypto "github.com/lanvige/goutils/crypto"
 )
 
-func expendKey(key []byte) []byte {
-	for len(key) < 16 {
-		key = append(key, key...)
-	}
-
-	return key[:16]
-}
+// ==== Public Operations ===== //
+// ==== Public Operations ===== //
 
 // Encrypt Encrypt
 func Encrypt(data []byte, key, iv []byte) (string, error) {
@@ -75,4 +70,15 @@ func Decrypt(base64Str string, key, iv []byte) ([]byte, error) {
 	}
 
 	return out, nil
+}
+
+// ==== Private Operations ===== //
+// ==== Private Operations ===== //
+
+func expendKey(key []byte) []byte {
+	for len(key) < 16 {
+		key = append(key, key...)
+	}
+
+	return key[:16]
 }
