@@ -16,7 +16,7 @@ func OrderBizIDGen() string {
 	nanosec := now.Nanosecond()
 	nanosecStr := strconv.Itoa(nanosec)
 	microsecStr := nanosecStr[0:3]
-	rdmStr := GetRandomNum(4)
+	rdmStr := GenRandomNumString(4)
 
 	// applog.Error(dataStr)
 	// applog.Errorf("microsecStr:%v", microsecStr)
@@ -36,7 +36,7 @@ func OrderShortBizIDGen() string {
 	nanosec := now.Nanosecond()
 	nanosecStr := strconv.Itoa(nanosec)
 	centisecStr := nanosecStr[0:2]
-	rdmStr := GetRandomNum(3)
+	rdmStr := GenRandomNumString(3)
 
 	// 不能用除来取，会取到单个数值的情况，像 0，这样订单就不满足长度条件了。
 	// centisecond := now.Nanosecond() / 10000000

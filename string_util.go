@@ -8,9 +8,8 @@ import (
 	"time"
 )
 
-// GetRandomString GetRandomString
-func GetRandomString(l int) string {
-	// str := "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+// GenRandomString GenRandomString
+func GenRandomString(l int) string {
 	str := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 	bytes := []byte(str)
@@ -25,8 +24,8 @@ func GetRandomString(l int) string {
 	return string(result)
 }
 
-// GetRandomNum GetRandomNum
-func GetRandomNum(l int) string {
+// GenRandomNumString GenRandomNumString
+func GenRandomNumString(l int) string {
 	str := "0123456789"
 	bytes := []byte(str)
 	result := []byte{}
@@ -40,17 +39,19 @@ func GetRandomNum(l int) string {
 	return string(result)
 }
 
-// GetRandomSixDigital GetRandomSixDigital
-func GetRandomSixDigital() string {
+// GenRandomSixDigital GenRandomSixDigital
+func GenRandomSixDigital() string {
 	var b [8]byte
 	_, err := rand.Read(b[:])
 	if err != nil {
 		log.Panicln(err)
 	}
+
 	c := binary.LittleEndian.Uint64(b[:]) % 1000000
 	if c < 100000 {
 		c = 100000 + c
 	}
+
 	return fmt.Sprintf("%d", c)
 }
 
