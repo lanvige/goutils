@@ -8,8 +8,8 @@ import (
 // ==== public Operations ===== //
 // ==== public Operations ===== //
 
-// parseAuthScheme parseAuthScheme
-func parseAuthScheme(authStr string) (AuthSchemeEnum, string, error) {
+// ParseAuthScheme parseAuthScheme
+func ParseAuthScheme(authStr string) (AuthSchemeEnum, string, error) {
 	if len(authStr) < 10 {
 		return AuthSchemeEnumOther, "", errors.New("TokenClaims Not Valid")
 	}

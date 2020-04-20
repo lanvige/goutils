@@ -13,8 +13,8 @@ import (
 // ==== Verify Operations ===== //
 // ==== Verify Operations ===== //
 
-// verifyClaimsHS parseClaims
-func verifyClaimsHS(token, secret string, payload jwtgo.Claims) error {
+// VerifyClaimsHS VerifyClaimsHS
+func VerifyClaimsHS(token, secret string, payload jwtgo.Claims) error {
 	tokenClaims, err := jwtgo.ParseWithClaims(token, payload, func(token *jwtgo.Token) (interface{}, error) {
 		return []byte(secret), nil
 	})
@@ -35,8 +35,8 @@ func verifyClaimsHS(token, secret string, payload jwtgo.Claims) error {
 	return errors.New("TokenClaims Not Valid")
 }
 
-// verifyClaimsRS parseClaims
-func verifyClaimsRS(tokenStr, pubkey string, payload jwtgo.Claims) error {
+// VerifyClaimsRS VerifyClaimsRS
+func VerifyClaimsRS(tokenStr, pubkey string, payload jwtgo.Claims) error {
 	//
 	// 方案一，使用 jwt ParseFromPEM：
 	// 	pem := `
@@ -84,8 +84,8 @@ func verifyClaimsRS(tokenStr, pubkey string, payload jwtgo.Claims) error {
 // ==== Parse Operations ===== //
 // ==== Parse Operations ===== //
 
-// parseClaimsUnverified parseClaimsUnverified
-func parseTokenUnverified(tokenStr string, payload jwtgo.Claims) (*jwtgo.Token, error) {
+// ParseTokenUnverified ParseTokenUnverified
+func ParseTokenUnverified(tokenStr string, payload jwtgo.Claims) (*jwtgo.Token, error) {
 	token, _, err := new(jwtgo.Parser).ParseUnverified(tokenStr, payload)
 	if nil != err {
 		return nil, err
@@ -102,8 +102,8 @@ func parseTokenUnverified(tokenStr string, payload jwtgo.Claims) (*jwtgo.Token, 
 	return nil, errors.New("TokenClaims Not Valid")
 }
 
-// parseClaimsUnverified parseClaimsUnverified
-func parseClaimsUnverified(tokenStr string, payload jwtgo.Claims) (*jwtgo.Token, jwtgo.Claims, error) {
+// ParseClaimsUnverified ParseClaimsUnverified
+func ParseClaimsUnverified(tokenStr string, payload jwtgo.Claims) (*jwtgo.Token, jwtgo.Claims, error) {
 	token, _, err := new(jwtgo.Parser).ParseUnverified(tokenStr, payload)
 	if nil != err {
 		return nil, nil, err
@@ -123,15 +123,15 @@ func parseClaimsUnverified(tokenStr string, payload jwtgo.Claims) (*jwtgo.Token,
 // ==== Generate Operations ===== //
 // ==== Generate Operations ===== //
 
-// GenerateHS256Token GenerateHSToken
-func generateHS256Token(secret string, payload jwtgo.Claims) (string, error) {
+// GenerateHS256Token GenerateHS256Token
+func GenerateHS256Token(secret string, payload jwtgo.Claims) (string, error) {
 	token := jwtgo.NewWithClaims(jwtgo.SigningMethodHS256, payload)
 
 	return token.SignedString([]byte(secret))
 }
 
 // GenerateRSA256Token GenerateRSAToken
-func generateRSA256Token(prikey string, payload jwtgo.Claims) (string, error) {
+func GenerateRSA256Token(prikey string, payload jwtgo.Claims) (string, error) {
 	token := jwtgo.NewWithClaims(jwtgo.SigningMethodRS256, payload)
 
 	// Decode
@@ -152,7 +152,7 @@ func generateRSA256Token(prikey string, payload jwtgo.Claims) (string, error) {
 }
 
 // GenerateRSA512Token GenerateRSAToken
-func generateRSA512Token(appID, prikey string, payload jwtgo.Claims) (string, error) {
+func GenerateRSA512Token(appID, prikey string, payload jwtgo.Claims) (string, error) {
 	token := jwtgo.NewWithClaims(jwtgo.SigningMethodRS512, payload)
 
 	// Decode
