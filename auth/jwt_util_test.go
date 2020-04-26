@@ -1,20 +1,17 @@
 package authorization
 
 import (
-	"encoding/base64"
-	"fmt"
 	"testing"
 	"time"
 
 	applog "github.com/lanvige/goutils/logger"
 
 	jwtgo "github.com/dgrijalva/jwt-go"
-	goutils "github.com/lanvige/goutils"
 )
 
 // Define
-// AppJWTPayload AppJWTPayload
-type AppJWTPayload struct {
+// TestJWTPayload TestJWTPayload
+type TestJWTPayload struct {
 	jwtgo.StandardClaims
 	// Provider string `json:"oap,omitempty"` //oap: OAuth Provider
 	Mode      string `json:"mode,omitempty"`
@@ -23,23 +20,8 @@ type AppJWTPayload struct {
 	SignAlg   string `json:"sal,omitempty"`
 }
 
-// BASIC
-
-func TestGenerateBasicToken(t *testing.T) {
-	keyStr := goutils.UUIDV4StringGen()
-	secretStr := goutils.UUIDV4StringGen()
-
-	tokenStr := fmt.Sprintf("%s:%s", keyStr, secretStr)
-	tokenB64Str := base64.StdEncoding.EncodeToString([]byte(tokenStr))
-
-	applog.Info(keyStr)
-	applog.Info(secretStr)
-	applog.Info(tokenStr)
-	applog.Info(tokenB64Str)
-}
-
 func TestGenerateHSToken(t *testing.T) {
-	myJWTClaims := AppJWTPayload{
+	myJWTClaims := TestJWTPayload{
 		StandardClaims: jwtgo.StandardClaims{
 			Issuer:    "30001",
 			IssuedAt:  time.Now().Unix(),
@@ -54,7 +36,7 @@ func TestGenerateHSToken(t *testing.T) {
 }
 
 func TestGenerateRSA256Token(t *testing.T) {
-	myJWTClaims := AppJWTPayload{
+	myJWTClaims := TestJWTPayload{
 		StandardClaims: jwtgo.StandardClaims{
 			Issuer:    "30001",
 			IssuedAt:  time.Now().Unix(),
@@ -75,7 +57,7 @@ func TestGenerateRSA256Token(t *testing.T) {
 
 // 生成测试用的 Server token
 func TestGenerateRSA512Token(t *testing.T) {
-	myJWTClaims := AppJWTPayload{
+	myJWTClaims := TestJWTPayload{
 		StandardClaims: jwtgo.StandardClaims{
 			Issuer:    "30001",
 			IssuedAt:  time.Now().Unix(),
