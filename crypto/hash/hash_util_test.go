@@ -20,7 +20,7 @@ func TestCRC32Hex(t *testing.T) {
 }
 
 func TestMD5ShortGen(t *testing.T) {
-	rdxString := goutils.GetRandomString(100)
+	rdxString := goutils.GenRandomNumString(100)
 	code1 := MD5Hex(rdxString)
 	code2 := MD5HexShort(rdxString)
 	code3 := MD5Base64(rdxString)
@@ -44,7 +44,7 @@ func TestSHA1Hex(t *testing.T) {
 }
 
 func TestHS256Hmac(t *testing.T) {
-	rdxString := goutils.GetRandomString(100)
+	rdxString := goutils.GenRandomNumString(100)
 	rdxString1 := []byte(rdxString)
 
 	code1 := HS256Hex(rdxString1, rdxString1)
