@@ -59,3 +59,13 @@ func TestABc(t *testing.T) {
 	applog.Error(abcde)
 
 }
+
+func TestABc2(t *testing.T) {
+	abc, _ := NewDateFromYearMonthDay("2019", "03", "04")
+
+	abccd := TimeFormatDate(abc)
+	applog.Error(abccd)
+
+	abccde := TimeFormatDateTime(abc)
+	applog.Error(abccde)
+}

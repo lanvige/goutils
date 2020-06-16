@@ -23,14 +23,15 @@ type TestJWTPayload struct {
 func TestGenerateHSToken(t *testing.T) {
 	myJWTClaims := TestJWTPayload{
 		StandardClaims: jwtgo.StandardClaims{
-			Issuer:    "30001",
+			Issuer:    "30050",
 			IssuedAt:  time.Now().Unix(),
 			ExpiresAt: time.Now().Add(24 * time.Hour).Unix(),
 		},
 		// Provider: provider,
+		SessionID: "84354f4578f91a",
 	}
 
-	code, _ := GenerateHS256Token("abcdddd", &myJWTClaims)
+	code, _ := GenerateHS256Token("ihY.dNu", &myJWTClaims)
 
 	applog.Info(code)
 }

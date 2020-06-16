@@ -18,6 +18,12 @@ func TestRandomStringGen(t *testing.T) {
 	applog.Error(code)
 }
 
+func TestPasswordStringGen(t *testing.T) {
+	code := GenRandomString(100)
+
+	applog.Error(code)
+}
+
 func TestRad6StringGen(t *testing.T) {
 	code := GenRandomSixDigital()
 

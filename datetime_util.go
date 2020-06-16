@@ -1,12 +1,90 @@
 package utils
 
 import (
+	"fmt"
 	"math"
 	"strconv"
 	"time"
 
 	applog "github.com/lanvige/goutils/logger"
 )
+
+// ==================== Format ================== //
+// ==================== Format ================== //
+
+// NewDateFromString NewDateFromString
+// layout 2006-01-02
+func NewDateFromString(value, layout string) (time.Time, error) {
+	tm, err := time.Parse(layout, value)
+
+	if nil != err {
+		return time.Time{}, err
+	}
+
+	return tm, nil
+}
+
+// NewDateFromYearMonthDay NewDateFromYearMonthDay
+func NewDateFromYearMonthDay(year, month, day string) (time.Time, error) {
+	str := fmt.Sprintf("%s-%s-%s", year, month, day)
+	layout := "2006-01-02"
+
+	tm, err := NewDateFromString(str, layout)
+	if nil != err {
+		return time.Time{}, err
+	}
+
+	return tm, nil
+}
+
+// NewDateUtc8FromYearMonthDay NewUtc8DateFromYearMonthDay
+func NewDateUtc8FromYearMonthDay(year, month, day string) (time.Time, error) {
+	layout := "2006-01-02"
+	str := fmt.Sprintf("%s-%s-%s", year, month, day)
+
+	utc8, err := time.LoadLocation("Asia/Shanghai")
+	if nil != err {
+		return time.Time{}, err
+	}
+
+	tm, errParse := time.ParseInLocation(layout, str, utc8)
+	if nil != errParse {
+		return time.Time{}, errParse
+	}
+
+	return tm, nil
+}
+
+// ==================== Format ================== //
+// ==================== Format ================== //
+
+// TimeFormatWithLayout TimeFormatWithLayout
+func TimeFormatWithLayout(tm time.Time, layout string) string {
+	s := tm.Format(layout)
+
+	return s
+}
+
+// TimeFormatDate 截断日期输出
+func TimeFormatDate(tm time.Time) string {
+	layout := "2006-01-02"
+
+	s := TimeFormatWithLayout(tm, layout)
+
+	return s
+}
+
+// TimeFormatDateTime 截断日期输出
+func TimeFormatDateTime(tm time.Time) string {
+	layout := "2006-01-02 15:04:05"
+
+	s := TimeFormatWithLayout(tm, layout)
+
+	return s
+}
+
+// ==================== 时区转换 ================== //
+// ==================== 时区转换 ================== //
 
 // Utc8Lastday 当前服务器时间的东八区昨天日期
 // 服务器时区不重要，统一换算为东八区
