@@ -23,7 +23,7 @@ func UUIDV1StringGen() string {
 // 5106b5e58ee44f74a5d49e779dcf7f57
 func UUIDV1HexGen() string {
 	uuid, _ := uuid.NewUUID()
-	return UUIDHex(uuid)
+	return hexFormat(uuid)
 }
 
 // UUIDV4StringGen UUIDV4StringGen
@@ -36,16 +36,7 @@ func UUIDV4StringGen() string {
 // 5106b5e58ee44f74a5d49e779dcf7f57
 func UUIDV4HexGen() string {
 	uuid := uuid.New()
-	return UUIDHex(uuid)
-}
-
-// UUIDHex UUIDHex
-func UUIDHex(uuid uuid.UUID) string {
-	hexuuid := make([]byte, 32)
-	hex.Encode(hexuuid, uuid[:])
-
-	abc, _ := uuid.MarshalBinary()
-	return string(abc)
+	return hexFormat(uuid)
 }
 
 // UUIDParseFromString UUIDParseFromString
@@ -61,7 +52,7 @@ func UUIDParseFromString(value string) (uuid.UUID, error) {
 
 // UUIDHexGenFromString 使用字符串生成固定的 UUID
 func UUIDHexGenFromString(value string) string {
-	return UUIDHex(UUIDGenFromString(value))
+	return hexFormat(UUIDGenFromString(value))
 }
 
 // UUIDStringGenFromString 使用字符串生成固定的 UUID
@@ -74,4 +65,14 @@ func UUIDGenFromString(value string) uuid.UUID {
 	sum := []byte(value)
 
 	return uuid.NewMD5(uuid.Nil, sum)
+}
+
+// ========== private ============= //
+
+// hexFormat hexFormat
+func hexFormat(uuid uuid.UUID) string {
+	hexuuid := make([]byte, 32)
+	hex.Encode(hexuuid, uuid[:])
+
+	return string(hexuuid)
 }
