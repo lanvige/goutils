@@ -1,53 +1,56 @@
 package utils
 
 import (
-	"crypto/md5"
 	"encoding/hex"
-	"io"
 
-	uuid "github.com/gofrs/uuid"
+	uuid "github.com/google/uuid"
 )
 
-// UUIDGen UUIDGen
+// UUIDStringGen UUIDStringGen
 // b9be9a09-7117-4bdb-9c6d-737269c86480
-func UUIDGen() string {
-	return UUIDV4Gen()
-}
-
-// UUIDV1Gen UUIDV1Gen
-// b9be9a09-7117-4bdb-9c6d-737269c86480
-func UUIDV1Gen() string {
-	return uuid.Must(uuid.NewV1()).String()
-}
-
-// UUIDV4Gen UUIDGen
-// b9be9a09-7117-4bdb-9c6d-737269c86480
-func UUIDV4Gen() string {
-	return uuid.Must(uuid.NewV4()).String()
+func UUIDStringGen() string {
+	return UUIDV4StringGen()
 }
 
 // UUIDV1StringGen UUIDV1StringGen
-// 5106b5e58ee44f74a5d49e779dcf7f57
+// b9be9a09-7117-4bdb-9c6d-737269c86480
 func UUIDV1StringGen() string {
-	uuid := uuid.Must(uuid.NewV1())
-	return UUIDString(uuid)
+	uuid, _ := uuid.NewUUID()
+	return uuid.String()
+}
+
+// UUIDV1HexGen UUIDV1HexGen
+// 5106b5e58ee44f74a5d49e779dcf7f57
+func UUIDV1HexGen() string {
+	uuid, _ := uuid.NewUUID()
+	return UUIDHex(uuid)
 }
 
 // UUIDV4StringGen UUIDV4StringGen
-// 5106b5e58ee44f74a5d49e779dcf7f57
+// b9be9a09-7117-4bdb-9c6d-737269c86480
 func UUIDV4StringGen() string {
-	uuid := uuid.Must(uuid.NewV4())
-	return UUIDString(uuid)
+	return uuid.New().String()
 }
 
-// UUIDString UUIDString
-func UUIDString(id uuid.UUID) string {
-	return hex.EncodeToString(id.Bytes())
+// UUIDV4HexGen UUIDV4HexGen
+// 5106b5e58ee44f74a5d49e779dcf7f57
+func UUIDV4HexGen() string {
+	uuid := uuid.New()
+	return UUIDHex(uuid)
 }
 
-// UUIDFromString UUIDFromString
-func UUIDFromString(value string) (uuid.UUID, error) {
-	uid, err := uuid.FromString(value)
+// UUIDHex UUIDHex
+func UUIDHex(uuid uuid.UUID) string {
+	hexuuid := make([]byte, 32)
+	hex.Encode(hexuuid, uuid[:])
+
+	abc, _ := uuid.MarshalBinary()
+	return string(abc)
+}
+
+// UUIDParseFromString UUIDParseFromString
+func UUIDParseFromString(value string) (uuid.UUID, error) {
+	uid, err := uuid.Parse(value)
 
 	if nil != err {
 		return uuid.Nil, err
@@ -56,14 +59,19 @@ func UUIDFromString(value string) (uuid.UUID, error) {
 	return uid, nil
 }
 
-// SettlementID 根据规则生成 UUID
-func SettlementID(id, modifier string) string {
-	h := md5.New()
-	io.WriteString(h, id)
-	io.WriteString(h, modifier)
-	sum := h.Sum(nil)
-	sum[6] = (sum[6] & 0x0f) | 0x30
-	sum[8] = (sum[8] & 0x3f) | 0x80
+// UUIDHexGenFromString 使用字符串生成固定的 UUID
+func UUIDHexGenFromString(value string) string {
+	return UUIDHex(UUIDGenFromString(value))
+}
 
-	return uuid.FromBytesOrNil(sum).String()
+// UUIDStringGenFromString 使用字符串生成固定的 UUID
+func UUIDStringGenFromString(value string) string {
+	return UUIDGenFromString(value).String()
+}
+
+// UUIDGenFromString 使用字符串生成固定的 UUID
+func UUIDGenFromString(value string) uuid.UUID {
+	sum := []byte(value)
+
+	return uuid.NewMD5(uuid.Nil, sum)
 }
