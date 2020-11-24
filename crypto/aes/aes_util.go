@@ -66,7 +66,7 @@ func Decrypt(base64Str string, key, iv []byte) ([]byte, error) {
 	// 去除 PKCS7 补码
 	out = goutilscrypto.PKCS7Unpadding(out)
 	if out == nil {
-		return nil, nil
+		return nil, errors.New("PKCS7Unpadding error")
 	}
 
 	return out, nil
