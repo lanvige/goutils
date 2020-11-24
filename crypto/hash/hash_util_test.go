@@ -43,6 +43,15 @@ func TestSHA1Hex(t *testing.T) {
 	applog.Error(code2)
 }
 
+func TestSHA1Hex2(t *testing.T) {
+	content := "123456"
+	code1 := SHA256Hex(content)
+	code2 := SHA256Base64(content)
+
+	applog.Error(code1)
+	applog.Error(code2)
+}
+
 func TestHS256Hmac(t *testing.T) {
 	rdxString := goutils.GenRandomNumString(100)
 	rdxString1 := []byte(rdxString)
@@ -69,6 +78,22 @@ func TestSHA1CHID(t *testing.T) {
 	applog.Error(content)
 
 	code1 := SHA1Hex(content)
+
+	applog.Error(code1)
+}
+
+func TestSHA1CHID2(t *testing.T) {
+
+	// country := "CN"
+	// cardType := "IDCARD"
+	// idNumber := "10112319970712004X"
+
+	// content := fmt.Sprintf("%s-%s-%s", country, cardType, idNumber)
+
+	content := "178293-RLayqllXolFYVX9RvglAu9ElE+k="
+	applog.Error(content)
+
+	code1, _ := GenPasswordHash(content)
 
 	applog.Error(code1)
 }

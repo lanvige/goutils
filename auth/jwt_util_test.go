@@ -76,3 +76,22 @@ func TestGenerateRSA512Token(t *testing.T) {
 
 	applog.Info(code)
 }
+
+type AppJWTPayload struct {
+	jwtgo.StandardClaims
+
+	UID           string         `json:"uid,omitempty"`
+	Mode          string         `json:"mode,omitempty"`
+	Scheme        AuthSchemeEnum `json:"scheme,omitempty"`
+	OAuthProvider string         `json:"oap,omitempty"` //oap: OAuth Provider
+	SessionID     string         `json:"sid,omitempty"`
+	Sign          string         `json:"sig,omitempty"`
+	SignAlg       string         `json:"sal,omitempty"`
+	Extra         string         `json:"extra,omitempty"` // 额外的字段，可以存放 json 等非标数据
+}
+
+func TestParseClaimsUnverified(t *testing.T) {
+	a := AppJWTPayload{}
+	tstring := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIzMDAxNSIsImV4cCI6NjY0MTY5ODQzMywianRpIjoiZTY5NzdlNDMtYTg3Zi00NDgxLWFkOTAtM2E4NTMyYTU5OGU0IiwiaWF0IjoxNTkyODk5MDc1LCJpc3MiOiIzMDAwMiIsIm9hcCI6Im1peGluIiwic2lkIjoiMzhiMmZiODgwMmM0NGI1Nzk1MzZmYjMwZTFkYjU0N2QifQ.s_7R2jeau7p6UPuvDQnvDufeRfBEkMIS9jsUdHtpP9o"
+	ParseClaimsUnverified(tstring, &a)
+}
